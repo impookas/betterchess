@@ -1,12 +1,17 @@
-import { mockGames, mockProgress, mockTrainingPlan, mockUser, mockWeaknesses } from "@/data/mock-data";
+import { mockProgress, mockTrainingPlan, mockWeaknesses } from "@/data/mock-data";
+import { getDashboardGames, getStoredImportedGames, getStoredUserProfile } from "@/lib/storage";
 
 export const db = {
   users: {
-    getCurrent: async () => mockUser,
+    getCurrent: async () => getStoredUserProfile(),
   },
   games: {
-    list: async () => mockGames,
-    getById: async (id: string) => mockGames.find((game) => game.id === id) ?? null,
+    list: async () => getDashboardGames(),
+    getById: async (id: string) => {
+      const games = await getDashboardGames();
+      return games.find((game) => game.id === id) ?? null;
+    },
+    getImportMeta: async () => getStoredImportedGames(),
   },
   trainingPlans: {
     getCurrent: async () => mockTrainingPlan,

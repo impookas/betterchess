@@ -2,9 +2,9 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 
 const highlights = [
-  "Onboard with Chess.com username, current rating, and target rating.",
-  "Review recent games with structured key moments and recurring themes.",
-  "Turn weaknesses into a practical weekly training plan.",
+  "Onboard with a Chess.com username, current rating, and target rating.",
+  "Import recent Chess.com games into lightweight local storage.",
+  "Review imported game metadata now, with deeper analysis ready for a later pass.",
 ];
 
 export default function Home() {
@@ -35,8 +35,8 @@ export default function Home() {
         <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <p className="text-sm uppercase tracking-[0.25em] text-slate-500">V1 boundaries</p>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-            <li>Real today: product structure, mock profile, mock analyzed games, training-plan shape, progress UI.</li>
-            <li>Next later: live Chess.com ingestion, engine-backed analysis, persistence, auth, and multi-user support.</li>
+            <li>Real today: onboarding, local profile persistence, Chess.com import, dashboard fallback logic, training-plan shape, and progress UI.</li>
+            <li>Next later: engine-backed analysis, stronger review insights, auth, and multi-user support.</li>
             <li>Intentionally excluded: live move suggestions, automation during games, and bot behavior of any kind.</li>
           </ul>
         </article>

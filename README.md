@@ -1,24 +1,56 @@
 # BetterChess, personal chess trainer MVP
 
-BetterChess is a local-first MVP scaffold for a personal chess trainer web app.
+BetterChess is a lean MVP scaffold for a personal chess trainer web app.
 It is intentionally **not** a live-play bot.
 
 ## What is real now
 
 - Next.js App Router app with TypeScript and Tailwind
 - Pages for `/`, `/onboarding`, `/dashboard`, `/games/[id]`, `/training`, `/progress`
-- Typed mock profile, games, themes, training plan, and progress data
+- Hosted-friendly onboarding form that visibly renders as a normal interactive client form
+- Chess.com import flow that runs in the browser against public Chess.com endpoints
+- Browser-local persistence for the profile and imported games via `localStorage`
+- Dashboard game list that prefers imported real Chess.com games and falls back to mock data when no import exists
+- Minimal import button with loading, success, and failure states
+- Review pages that show real imported metadata and clearly mark deeper analysis as pending when the game came from Chess.com
 - Reusable UI components for weakness cards, training focus cards, game list, key moment review, and progress summary
-- A simple repository layer and placeholder analysis and Chess.com ingestion modules
-- Clean scaffold for a single-user local MVP that can grow into a broader product
 
-## What is mocked right now
+## What is still mocked or partial
 
-- Chess.com ingestion
-- Engine-backed game analysis
-- Database persistence
+- Engine-backed analysis
+- Theme extraction from PGN
+- Accurate rating delta tracking from Chess.com game history
 - Authentication and multi-user support
 - Payments, subscriptions, and any production billing logic
+
+## Local vs hosted behavior
+
+This V1 now uses **browser-local storage** for the user profile and imported games.
+That means the same core behavior works both locally and on hosted deployments like Vercel, without relying on server file writes.
+
+Saved keys live in the browser only:
+
+```text
+betterchess:user-profile
+betterchess:imported-games
+```
+
+Notes:
+
+- Data is scoped to the specific browser profile and device you used.
+- Vercel deployments do not share this data across users or devices.
+- Clearing browser storage resets the saved profile/import state and returns the app to mock fallback behavior.
+- There is no auth or cloud sync in this MVP.
+
+## Chess.com import behavior
+
+- Enter a Chess.com username on `/onboarding` and save the profile.
+- The app attempts an immediate import of recent games in the browser.
+- The dashboard also includes an `Import latest Chess.com games` button for re-importing the latest games later.
+- The import uses public Chess.com archive endpoints only.
+- The app currently pulls recent standard rated games from the latest available monthly archives and stores up to 10 games in browser storage.
+- Imported games include metadata like opponent, date, color, time control, PGN, and source URL.
+- Imported games do **not** yet have full move-by-move analysis. Review pages label this clearly as pending.
 
 ## Local run steps
 
@@ -72,6 +104,14 @@ src/
   types/
 ```
 
+## Limitations for this pass
+
+- Persistence is browser-local, not a database.
+- The saved profile is a single local browser profile.
+- Imported games are overwritten on each fresh import instead of merged historically.
+- Review pages for imported games are metadata-first, with analysis placeholders rather than true PGN insights.
+- The app should still be treated as a V1 MVP, not a fully production-ready product.
+
 ## Architecture note
 
 ### Reusable from the old chess bot idea
@@ -92,4 +132,4 @@ This MVP is focused on post-game improvement, training structure, and progress t
 
 ## Recommended next implementation step
 
-Wire real Chess.com import for a known username, store imported games in a lightweight local database layer, and replace one mocked review flow with a real PGN-to-analysis pipeline.
+Build a real PGN analysis pass for imported games, then replace the placeholder review status with actual extracted mistakes, themes, and coach summaries from the saved PGNs.

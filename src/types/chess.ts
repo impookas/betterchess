@@ -34,6 +34,10 @@ export type GameReview = {
   themes: Theme[];
   keyMoments: Position[];
   coachTakeaway: string;
+  analysisStatus?: "mock" | "pending" | "complete";
+  sourceUrl?: string;
+  pgn?: string;
+  timeControl?: string;
 };
 
 export type UserProfile = {
