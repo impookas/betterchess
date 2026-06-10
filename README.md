@@ -1,6 +1,6 @@
-# Knightline, personal chess trainer MVP
+# BetterChess, personal chess trainer MVP
 
-Knightline is a local-first MVP scaffold for a personal chess trainer web app.
+BetterChess is a local-first MVP scaffold for a personal chess trainer web app.
 It is intentionally **not** a live-play bot.
 
 ## What is real now

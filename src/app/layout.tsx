@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Knightline | Personal Chess Trainer",
+  title: "BetterChess | Personal Chess Trainer",
   description: "Local-first chess training MVP with onboarding, review, training plans, and progress tracking.",
 };
 

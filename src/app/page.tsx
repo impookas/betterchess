@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <AppShell
       title="Train with structure, not guesswork."
-      subtitle="Knightline is a serious but lean personal chess trainer that turns your recent games into focused study work. This V1 is local-first, single-user, and built to grow into a public product later."
+      subtitle="BetterChess is a serious but lean personal chess trainer that turns your recent games into focused study work. This V1 is local-first, single-user, and built to grow into a public product later."
     >
       <section className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
         <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
